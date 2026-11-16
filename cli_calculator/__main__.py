@@ -2,7 +2,7 @@
 from cli_calculator.src.objects.calculadora import Calculadora
 from cli_calculator.src.utils.logger import alertar
 from cli_calculator.src.utils.terminal import cls, pause, encerrar
-from cli_calculator.src.utils.user_input import ler_float, ler_opcao
+from cli_calculator.src.utils.user_input import solicitar_operador, solicitar_numero
 
 # imports externos
 
@@ -24,13 +24,11 @@ MENU_STR: str = """
 def main():
     cls()
     print(MENU_STR)
-    operador: int = ler_opcao(
-        "Digite o número da operação desejada (1-4):\n> ", opcoes=[0, 1, 2, 3, 4]
-    )
+    operador: int = solicitar_operador(opcoes=[0, 1, 2, 3, 4])
     if operador == 0:
         encerrar()
-    a: float = ler_float("Digite o primeiro número:\n> ")
-    b: float = ler_float("Digite o segundo número:\n> ")
+    a: float = solicitar_numero()
+    b: float = solicitar_numero()
     try:
         resultado = Calculadora.calcular(a, b, operador)
         print(f"Resultado: {resultado:g}")
